@@ -1,14 +1,19 @@
 <template>
     <div>
-      <div>
-        <input type="file" ref="myFile" @change="loadFile">
-      </div>
-      <div>
-        <form @submit.prevent="loadVideo">  
-          <input type="text" name="YTurl" placeholder="Enter Youtube URL" v-model="YTurl">
-          <input type="submit" value="Load Video" class="btn">
-        </form>
-      </div>
+      <b-container fluid class="head justify-content-center">
+        <b-row>
+          <b-col class="text-right align-self-center brand">LyricSync</b-col>
+          <b-col>  
+            <b-form inline @submit.prevent="loadVideo">  
+              <b-form-input type="url" name="YTurl" placeholder="Enter Youtube URL" v-model="YTurl"></b-form-input>
+              <b-button type="submit" value="Load Video">Load Video</b-button>
+            </b-form>
+          </b-col>
+          <b-col>
+            <b-form-file accept=".txt" v-model="file" ref="myFile" @input="loadFile"></b-form-file>
+          </b-col>
+        </b-row>
+      </b-container>
       <div v-for="TID in IDT" v-bind:key="TID.ID">
         <YTVideo :ytid="TID.ID" :lines="TID.Lines"/>
       </div>   
@@ -51,7 +56,7 @@ export default {
         this.YTurl = "";
       },
       loadFile() {
-        let file = this.$refs.myFile.files[0];
+        let file = this.file;
         if(!file || file.type !== 'text/plain') return;
         let reader = new FileReader();
         reader.readAsText(file, "UTF-8");
@@ -85,7 +90,8 @@ export default {
     data: () => {
         return {
             IDT: [],
-            YTurl: ""
+            YTurl: "",
+            File: null
         }
     }
 }
@@ -94,18 +100,36 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  h3 {
+    margin: 40px 0 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: #42b983;
+  }
+  .head {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 7px
+  }
+  .brand {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+</style>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
 </style>

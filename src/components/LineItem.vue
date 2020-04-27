@@ -1,7 +1,7 @@
 <template>
     <div>
         <p :class="{ active : line.active}">
-          <button @click="$emit('changeTime', line)"> {{line.formattedTime()}} </button>
+          <b-button :class="{ activeButton : line.active}" @click="$emit('changeTime', line)"> {{line.formattedTime()}} </b-button>
           {{line.text}}
         </p>
     </div>
@@ -33,4 +33,9 @@ a {
 .active {
   color: red;
 }
+
+.activeButton {
+  background-color: red;
+}
+
 </style>

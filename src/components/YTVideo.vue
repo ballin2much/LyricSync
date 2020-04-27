@@ -2,14 +2,13 @@
     <div>
         <youtube :video-id="ytid" ref="youtube" @playing="refreshtime()"/>
         <div>
-          <button @click="saveLyrics" type="button">Download Lyrics</button>
+          <b-button class="saveButton" @click="saveLyrics" type="button">Save Lyrics to Text</b-button>
         </div>
-        <p>{{ ytid }}</p>
-        <form @submit.prevent="addLine">  
-          <input type="text" name="linetext" placeholder="Add Lyrics..." v-model="linetext">
-          <input type="submit" value="Enter Lyrics" class="btn">
-        </form>
-        <LineList :lines="lines" v-on:changeTime="skipTo"/>       
+        <b-form class="justify-content-center" inline @submit.prevent="addLine">  
+          <b-form-input type="text" name="linetext" placeholder="Add Lyrics..." v-model="linetext"></b-form-input>
+          <b-button value="Enter Lyrics">Submit</b-button>
+        </b-form>
+        <LineList class="justify-content-left text-left lyrics" :lines="lines" v-on:changeTime="skipTo"/>       
     </div>
 </template>
 
@@ -116,5 +115,13 @@ li {
 }
 a {
   color: #42b983;
+}
+.saveButton {
+  margin-bottom: 7px;
+}
+
+.lyrics {
+  margin-left: 25vw;
+  margin-right: 25vw;
 }
 </style>
