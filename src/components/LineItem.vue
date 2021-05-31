@@ -33,7 +33,6 @@ a {
 .active {
   color: red;
 }
-
 .activeButton {
   background-color: red;
 }

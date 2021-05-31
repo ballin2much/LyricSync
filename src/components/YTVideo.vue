@@ -6,7 +6,7 @@
         </div>
         <b-form class="justify-content-center" inline @submit.prevent="addLine">  
           <b-form-input type="text" name="linetext" placeholder="Add Lyrics..." v-model="linetext"></b-form-input>
-          <b-button value="Enter Lyrics">Submit</b-button>
+          <b-button type="submit" value="Enter Lyrics">Submit</b-button>
         </b-form>
         <LineList class="justify-content-left text-left lyrics" :lines="lines" v-on:changeTime="skipTo"/>       
     </div>
@@ -35,6 +35,7 @@ export default {
           return await this.$refs.youtube.player.getDuration();
         },
         async getTime() {
+          console.log("time gotten")
           return await this.$refs.youtube.player.getCurrentTime();
         },
         saveLyrics() {
@@ -45,6 +46,7 @@ export default {
           FileSaver.saveAs(blob, "Lyrics");
         },
         async addLine() {
+          console.log("click");
           let totalSeconds = await this.getTime();
           const newLine = {
             timeStamp: totalSeconds,
@@ -83,16 +85,18 @@ export default {
           intID = setInterval( async () => {
             let time = await this.$refs.youtube.player.getCurrentTime();
             let temp = null;
-            this.lines.forEach((line) => {
-              line.active = false;
-              if (temp == null) {
-                if (line.timeStamp < time) {
+            if (this.lines != null) {
+              this.lines.forEach((line) => {
+                line.active = false;
+                if (temp == null) {
+                  if (line.timeStamp < time) {
+                    temp = line;
+                  }
+                } else if ((line.timeStamp < time) && (line.timeStamp > temp.timeStamp)) {
                   temp = line;
                 }
-              } else if ((line.timeStamp < time) && (line.timeStamp > temp.timeStamp)) {
-                temp = line;
-              }
-            }); 
+              }); 
+            }
             if (temp != null) temp.active = true;
           }, 1000);
         }

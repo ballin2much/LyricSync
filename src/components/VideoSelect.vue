@@ -1,17 +1,15 @@
 <template>
     <div>
       <b-container fluid class="head justify-content-center">
-        <b-row>
-          <b-col class="text-right align-self-center brand">LyricSync</b-col>
-          <b-col>  
-            <b-form inline @submit.prevent="loadVideo">  
-              <b-form-input type="url" name="YTurl" placeholder="Enter Youtube URL" v-model="YTurl"></b-form-input>
-              <b-button type="submit" value="Load Video">Load Video</b-button>
-            </b-form>
-          </b-col>
-          <b-col>
-            <b-form-file accept=".txt" v-model="file" ref="myFile" @input="loadFile"></b-form-file>
-          </b-col>
+        <b-row class="d-flex justify-content-center brand botspace">LyricSync</b-row>
+        <b-row class="d-flex justify-content-center text-center botspace">  
+          <b-form inline @submit.prevent="loadVideo(null)">  
+            <b-form-input type="url" name="YTurl" placeholder="Enter Youtube URL" v-model="YTurl"></b-form-input>
+            <b-button type="submit" value="Load Video">Load Video</b-button>
+          </b-form>
+        </b-row>
+        <b-row class="d-flex justify-content-center botspace col-sm-4 center">
+          <b-form-file accept=".txt" v-model="file" ref="myFile" @input="loadFile"></b-form-file>
         </b-row>
       </b-container>
       <div v-for="TID in IDT" v-bind:key="TID.ID">
@@ -32,27 +30,22 @@ export default {
       loadVideo(fileText) {
         let url = this.YTurl;
         let ID = '';
-        url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-        if(url[2] !== undefined) {
-          ID = url[2].split(/[^0-9a-z_-]/i);
-          ID = ID[0];
-        } else {
-          ID = url;
-        }
-        ID = ID[0];
+        ID = this.$youtube.getIdFromUrl(url);
+        console.log("File:");
+        console.log(fileText);
         if (fileText == null) {
           this.IDT = [{
             ID: ID,
             Lines: []
           }];
+        console.log("IDT:");
+        console.log(this.IDT[0].Lines);
         } else {
           this.IDT = [{
             ID: ID,
             Lines: fileText
           }];
         }
-        console.log("IDT:");
-        console.log(this.IDT);
         this.YTurl = "";
       },
       loadFile() {
@@ -64,7 +57,7 @@ export default {
           let fileText = evt.target.result;
           fileText = fileText.split("\n");
           console.log(fileText);
-          this.YTurl = fileText.shift();
+          this.YTurl = "https://www.youtube.com/watch?v=" + fileText.shift();
           let lineArray = []
           fileText.forEach( line => {
             let totalSeconds = parseFloat(line.substring(line.lastIndexOf("[")+1,line.lastIndexOf("]")));
@@ -114,14 +107,16 @@ export default {
   a {
     color: #42b983;
   }
-  .head {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 7px
-  }
   .brand {
     font-size: 20px;
     font-weight: bold;
+  }
+  .botspace {
+    margin-bottom: 7px;
+  }
+  .center {
+    margin-left: auto;
+    margin-right: auto;
   }
 
 </style>
