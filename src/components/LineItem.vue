@@ -9,8 +9,8 @@
 
 <script>
 export default {
-    name: 'LineItem',
-    props: ["line"],
+  name: 'LineItem',
+  props: ['line']
 }
 </script>
 

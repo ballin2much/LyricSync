@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import LineItem from './LineItem.vue';
+import LineItem from './LineItem.vue'
 
 export default {
-    name: 'YTVideo',
-    components: {
-      LineItem
-    },
-    props: {
-        lines: Array
-    }
+  name: 'YTVideo',
+  components: {
+    LineItem
+  },
+  props: {
+    lines: Array
+  }
 }
 </script>
 

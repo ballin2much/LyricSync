@@ -1,12 +1,11 @@
 // vue.config.js
 module.exports = {
-    // options...
-    configureWebpack: {
-        devServer: {
-          watchOptions: {
-            poll: true
-          }
-        }
+  // options...
+  configureWebpack: {
+    devServer: {
+      watchOptions: {
+        poll: true
       }
+    }
   }
-  
+}

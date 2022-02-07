@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import VideoSelect from "@/components/VideoSelect.vue";
+import VideoSelect from '@/components/VideoSelect.vue'
 
 export default {
   name: 'App',

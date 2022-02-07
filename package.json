@@ -16,19 +16,24 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.8.7",
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
+    "@vue/cli-plugin-babel": "~4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-service": "~4.5.15",
+    "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.4.1",
     "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "mutationobserver-shim": "^0.3.5",
     "popper.js": "^1.16.0",
     "portal-vue": "^2.1.6",
-    "sass": "^1.26.3",
+    "sass": "^1.49.7",
     "sass-loader": "^8.0.0",
-    "vue-cli-plugin-bootstrap-vue": "^0.6.0",
+    "vue-cli-plugin-bootstrap-vue": "^0.8.2",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -38,7 +43,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/standard"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
